@@ -1,1 +1,1 @@
-## Python SMTP发送邮件类
+## 使用Python发送电子邮件
