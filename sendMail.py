@@ -39,15 +39,5 @@ class Sendmail:
 			logging.debug(e)
 
 if __name__ == "__main__":
-	# 以“python3 sendMail.py 命令行参数”的形式运行本程序
-	mailHost = "smtp.sina.com"
-	mailUser = sys.argv[1]
-	mailPassword = sys.argv[2]
-	sender = sys.argv[3]
-	receiverList = sys.argv[4].split(",")
-	# 将字符串中的"~"替换成回车
-	msgPlain = sys.argv[5].replace("~", "\n")
-	subject = sys.argv[6]
-	mailType = sys.argv[7]
-	Sendmail(mailHost, mailUser, mailPassword).sendMail(sender, receiverList, msgPlain, subject, mailType)
+	# Sendmail(mailHost, mailUser, mailPassword).sendMail(sender, receiverList, msgPlain, subject, mailType)
 
