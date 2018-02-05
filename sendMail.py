@@ -43,7 +43,7 @@ class Sendmail:
 			smtpObj = smtplib.SMTP()
 			smtpObj.connect(self.mailHost, 25)
 			smtpObj.login(self.mailUser,self.mailPassword)
-			smtpObj.sendmail(sender, receiverList, message.as_string())
+			smtpObj.sendmail(self.sender, self.receiverList, message.as_string())
 			logging.debug("邮件发送成功")
 		except smtplib.SMTPException as e:
 			logging.debug(e)
