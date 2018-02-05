@@ -15,19 +15,29 @@ from email.header import Header
 logging.basicConfig(level=logging.DEBUG,format="%(asctime)s-%(levelname)s-%(message)s")
 
 class Sendmail:
-	def __init__(self, mailHost, mailUser, mailPassword):
+	def __init__(self, mailHost, mailUser, mailPassword, sender, receiverList, msgPlain, subject, mailType):
 		# smtp服务器
 		self.mailHost = mailHost
 		# 用户名
 		self.mailUser = mailUser
 		# 密码
 		self.mailPassword = mailPassword
-	def sendMail(self, sender, receiverList, msgPlain, subject, mailType):
+		# 发送方
+		self.sender = sender
+		# 接收方列表
+		self.receiverList = receiverList
 		# 邮件正文
-		message = MIMEText(msgPlain, mailType, 'utf-8')
-		message['From'] = self.mailUser
-		message['To'] = ",".join(receiverList)
-		message['Subject'] = Header(subject, 'utf-8')
+		self.msgPlain = msgPlain
+		# 邮件主题
+		self.subject = subject
+		# 邮件MIME类型
+		self.mailType = mailType
+	def sendMail(self):
+		# 邮件正文
+		message = MIMEText(self.msgPlain, self.mailType, 'utf-8')
+		message['From'] = Header(self.mailUser)
+		message['To'] = Header(",".join(self.receiverList))
+		message['Subject'] = Header(self.subject, 'utf-8')
 
 		try:
 			smtpObj = smtplib.SMTP()
@@ -39,5 +49,5 @@ class Sendmail:
 			logging.debug(e)
 
 if __name__ == "__main__":
-	# Sendmail(mailHost, mailUser, mailPassword).sendMail(sender, receiverList, msgPlain, subject, mailType)
+	# Sendmail(mailHost, mailUser, mailPassword, sender, receiverList, msgPlain, subject, mailType).sendMail()
 
