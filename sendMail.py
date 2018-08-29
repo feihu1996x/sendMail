@@ -9,9 +9,9 @@
 """
 
 
-import smtplib,logging,traceback
 from email.mime.text import MIMEText
 from email.header import Header
+import logging, smtplib, traceback
 
 
 class Sendmail:
@@ -39,7 +39,7 @@ class Sendmail:
             smtpObj.connect(self.mailHost, 25)
             smtpObj.login(self.mailUser,self.mailPassword)
             smtpObj.sendmail(self.sender, receiverList, message.as_string())
-	    logging.debug("邮件发送成功")
+	        logging.debug("邮件发送成功")
         except smtplib.SMTPException as e:
             logging.debug(e)
 
